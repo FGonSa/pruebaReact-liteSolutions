@@ -1,0 +1,63 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-warning {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.btn-success {
+  background-color: #10b981;
+  color: white;
+}
+
+.error-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+.error-banner button {
+  background: transparent;
+  color: #b91c1c;
+  font-weight: bold;
+  padding: 0 0.4rem;
+}
+
+.loading {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+  padding: 2rem;
+}
