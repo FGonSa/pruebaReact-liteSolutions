@@ -14,6 +14,7 @@ function App() {
   const [showOnlyActive, setShowOnlyActive] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [searchProduct, setSearchProduct] = useState<string>('');
 
   // Solución Bug 1
   useEffect(() => {
@@ -80,7 +81,12 @@ function App() {
       selectedCategory === 'all' ? true : p.category === selectedCategory
     )
     //.filter((p) => (showOnlyActive ? p.active || true : true)); // esto está mal ya que siempre devuelve true
-    .filter((p) => (showOnlyActive ? p.active : true)); // corrección
+    .filter((p) => (showOnlyActive ? p.active : true)) // corrección
+
+    // NUEVO FILTRO: Búsqueda por nombre
+  .filter((p) =>
+    p.name.toLowerCase().includes(searchProduct.toLowerCase())
+  );
 
   return (
     <div className="app">
@@ -103,6 +109,10 @@ function App() {
         onCategoryChange={setSelectedCategory}
         showOnlyActive={showOnlyActive}
         onToggleActive={() => setShowOnlyActive((v) => !v)}
+
+        // Nuevas Props para aplicar el Filtro de Búsqueda
+        searchProduct={searchProduct}
+        onSearchChange={setSearchProduct}
       />
 
       {showForm && (
