@@ -40,8 +40,9 @@ function ProductForm({ product, onSaved, onCancel }: Props) {
       return false;
     }
 
-    if (!formData.price || formData.price < 0) {
-      setFormError('El precio debe ser un número positivo');
+    // Solución Bug 4
+    if (!formData.price || formData.price < 0) { // En caso de querer aceptar 0 como precio válido, cambiar la condición
+      setFormError('El precio mínimo debe ser superior a 0'); // Corregimos el mensaje 
       return false;
     }
 

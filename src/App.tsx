@@ -15,9 +15,11 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
+  // Solución Bug 1
   useEffect(() => {
     fetchProducts();
-  }, [products]);
+  }, []); // este Effect debe empezar con dependencias vacías para que solo se ejecute una vez al montar el componente y evitar bucle de renderizado.
+
 
   const fetchProducts = async () => {
     try {
@@ -33,10 +35,14 @@ function App() {
 
   const handleDelete = async (id: string) => {
     try {
-      await deleteProduct(id);
-      const index = products.findIndex((p) => p.id === id);
-      products.splice(index, 1);
-      setProducts(products);
+      await deleteProduct(id); // simulamos borrar de la API
+
+      // const index = products.findIndex((p) => p.id === id);
+      // products.splice(index, 1); --> Esto es incorrecto porque no se debe mutar el estado directamente.
+      
+      // Solución Bug 2
+      setProducts((currentProducts) => 
+      currentProducts.filter(product => product.id !== id)) // es necesario filtrar para que se reflejen los cambios al eliminar
     } catch {
       setError('Error al eliminar el producto');
     }
@@ -68,11 +74,13 @@ function App() {
     setShowForm(true);
   };
 
+//Solución Bug 3
   const filteredProducts = products
     .filter((p) =>
       selectedCategory === 'all' ? true : p.category === selectedCategory
     )
-    .filter((p) => (showOnlyActive ? p.active || true : true));
+    //.filter((p) => (showOnlyActive ? p.active || true : true)); // esto está mal ya que siempre devuelve true
+    .filter((p) => (showOnlyActive ? p.active : true)); // corrección
 
   return (
     <div className="app">
