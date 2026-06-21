@@ -21,7 +21,7 @@ function ProductList({ products, onDelete, onEdit, onToggleActive }: Props) {
       <div className="product-grid">
         {products.map((product) => (
           <ProductCard
-            key={product.name}
+            key={product.id} // La prop key debe apuntar al ID para evitar conflictos y problemas de renderizado
             product={product}
             onDelete={onDelete}
             onEdit={onEdit}
